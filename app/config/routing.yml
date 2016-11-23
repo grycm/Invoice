@@ -1,0 +1,4 @@
+invoice:
+    resource: "@InvoiceBundle/Controller/"
+    type:     annotation
+    prefix:   /
