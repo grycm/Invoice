@@ -5,7 +5,7 @@ Nowa faktura
 {% block body %}
 <div class="container">
 
-<form class="form-horizontal">
+<form class="form-horizontal" method="POST">
     <div id="header">
         <div class="col-sm-6">
             <div class="form-group col-sm-12"><label class="col-sm-3">Faktura nr: </label><input type="text" class="col-sm-9" name="invoice_number"></div>
@@ -54,13 +54,13 @@ Nowa faktura
             <tbody>
                 <tr class="product_row">
                     <td>1</td>
-                    <td class="product_name"><input type="text" name="product_name"></td>
-                    <td class="product_quantity"><input type="number" name="product_quantity"></td>
-                    <td class="netto_price"><input type="number" name="netto_price"></td>
-                    <td class="netto_value"><input type="number" disabled="disabled" name="netto_value"></td>
-                    <td class="vat"><input type="number" value="23" name="vat"></td>
-                    <td class="vat_value"><input type="number" disabled="disabled" name="vat_value"></td>
-                    <td class="brutto_value"><input type="number" disabled="disabled" name="brutto_value"></td>
+                    <td class="product_name"><input type="text" name="product_name[]"></td>
+                    <td class="product_quantity"><input type="number" name="product_quantity[]"></td>
+                    <td class="netto_price"><input type="number" name="netto_price[]"></td>
+                    <td class="netto_value"><input type="number" disabled="disabled" name="netto_value[]"></td>
+                    <td class="vat"><input type="number" value="23" name="vat[]"></td>
+                    <td class="vat_value"><input type="number" disabled="disabled" name="vat_value[]"></td>
+                    <td class="brutto_value"><input type="number" disabled="disabled" name="brutto_value[]"></td>
                 </tr>
             </tbody>
         </table>
