@@ -33,4 +33,29 @@ class InvoiceController extends Controller
 
         dump($post);
     }
+
+
+
+
+
+    /**
+     * Export to PDF
+     *
+     * @Route("/pdf", name="acme_demo_pdf")
+     */
+    public function pdfAction()
+    {
+        $html = $this->renderView('InvoiceBundle:Invoice:new.html.twig');
+
+        $filename = sprintf('test-%s.pdf', date('Y-m-d'));
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            200,
+            [
+                'Content-Type'        => 'application/pdf',
+                'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
+            ]
+        );
+    }
 }

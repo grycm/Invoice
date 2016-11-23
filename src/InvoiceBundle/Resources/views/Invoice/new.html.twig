@@ -1,4 +1,4 @@
-{% extends 'InvoiceBundle::main.html.twig' %}
+{% extends "InvoiceBundle::main.html.twig" %}
 {% block title %}
 Nowa faktura
 {% endblock %}
@@ -58,13 +58,14 @@ Nowa faktura
                     <td class="product_quantity"><input type="number" name="product_quantity[]"></td>
                     <td class="netto_price"><input type="number" name="netto_price[]"></td>
                     <td class="netto_value"><input type="number" disabled="disabled" name="netto_value[]"></td>
-                    <td class="vat"><input type="number" value="23" name="vat[]"></td>
+                    <td class="vat"><input type="number" value="23" disabled="disabled" name="vat[]"></td>
                     <td class="vat_value"><input type="number" disabled="disabled" name="vat_value[]"></td>
                     <td class="brutto_value"><input type="number" disabled="disabled" name="brutto_value[]"></td>
                 </tr>
             </tbody>
         </table>
         <button class="btn" id="count_btn">Przelicz</button>
+        <button class="btn" id="add_btn">Dodaj wiersz</button>
     </div>
     <div class="col-sm-12" id="sum">
         <div class="col-sm-6"></div>
