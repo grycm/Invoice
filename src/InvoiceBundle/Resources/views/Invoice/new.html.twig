@@ -74,27 +74,32 @@ Nowa faktura
             <thead>
             <tr>
                 <th>VAT</th>
-                <th>Wartość Netto</th>
-                <th>Wartość VAT</th>
-                <th>Wartość Brutto</th>
+                <th>Suma Netto</th>
+                <th>Suma VAT</th>
+                <th>Suma Brutto</th>
             </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>23%</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td id="netto_sum"></td>
+                    <td id="vat_sum"></td>
+                    <td id="brutto_sum"></td>
                 </tr>
             </tbody>
         </table></div>
     </div>
     <div class="col-sm-12"><hr></div>
     <div class="col-sm-12">
-        <p>Uwagi</p>
-        <textarea class="col-sm-12" name="comment"></textarea>
+        <label for="comment">Uwagi</label>
+        <textarea class="form-control col-sm-12" name="comment" placeholder="Np. informacja o zwolnieniu z VAT"></textarea>
     </div>
-    <input type="submit" value="Generuj" class="btn">
+    <div class="col-sm-12">
+        <hr>
+    </div>
+    <div class="col-sm-12">
+        <p><input type="submit" value="Generuj" class="btn"></p>
+    </div>
 </form>
 
 </div>

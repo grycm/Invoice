@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    {#<link rel="stylesheet" href="{{ absolute_url(asset('css/bootstrap.min.css')) }}">#}
+    {#<link rel="stylesheet" href="{{ absolute_url(asset('css/bootstrap-theme.min.css')) }}">#}
+    <title>Faktura {{ invoice.invoiceNumber }}</title>
+
+</head>
+<body>
+
+<div class="container">
+    <div id="header">
+        <div class="col-sm-6">
+            <div class="form-group col-sm-12"><label class="col-sm-3">Faktura nr: </label><div class="col-sm-9">{{ invoice.invoiceNumber }}</div></div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group col-sm-12"><label class="col-sm-6">Data wystawienia:</label><div class="col-sm-6">{{ invoice.generationDate }}</div></div>
+            <div class="form-group col-sm-12"><label class="col-sm-6">Data zakończenia usługi:</label><div class="col-sm-6">{{ invoice.completionDate }}</div></div>
+            <div class="form-group col-sm-12"><label class="col-sm-6">Miejsce wystawienia</label><div class="col-sm-6">{{ invoice.place }}</div></div>
+        </div>
+    </div>
+    <div class="col-sm-12"><hr></div>
+    <div id="data">
+
+        <div class="col-sm-6" id="seller">
+            <h3>Sprzedawca:</h3>
+            <div class="form-group col-sm-12"><label class="col-sm-3">Nazwa</label><div class="col-sm-9"></div>{{ invoice.seller.sellerName }}</div>
+            <div class="form-group col-sm-12"><label class="col-sm-3">Adres</label><div class="col-sm-9">{{ invoice.seller.sellerAddress }}</div></div>
+                <div class="form-group col-sm-12"><label class="col-sm-3">Miejscowość</label><div>{{ invoice.seller.sellerCity }}</div></div>
+            <div class="form-group col-sm-12"><label class="col-sm-3">Kod pocztowy</label><div>{{ invoice.seller.sellerPostal }}</div></div>
+                <div class="form-group col-sm-12"><label class="col-sm-3">NIP</label><div>{{ invoice.seller.sellerNIP }}</div></div>
+        </div>
+
+        <div class="col-sm-6" id="client">
+            <h3>Nabywca:</h3>
+            <div class="form-group col-sm-12"><label class="col-sm-3">Nazwa</label><div class="col-sm-9"></div>{{ invoice.client.clientName }}</div>
+            <div class="form-group col-sm-12"><label class="col-sm-3">Adres</label><div class="col-sm-9">{{ invoice.client.clientAddress }}</div></div>
+            <div class="form-group col-sm-12"><label class="col-sm-3">Miejscowość</label><div>{{ invoice.client.clientCity }}</div></div>
+            <div class="form-group col-sm-12"><label class="col-sm-3">Kod pocztowy</label><div>{{ invoice.client.clientPostal }}</div></div>
+            <div class="form-group col-sm-12"><label class="col-sm-3">NIP</label><div>{{ invoice.client.clientNIP }}</div></div>
+        </div>
+    </div>
+    <div class="col-sm-12"><hr></div>
+    <div class="col-sm-12" id="table">
+        <table id="products" class="table">
+            <thead>
+            <tr>
+                <th>Lp.</th>
+                <th>Nazwa towaru/usługi</th>
+                <th>Ilość</th>
+                <th>Cena netto</th>
+                <th>Wartość netto</th>
+                <th>Stawka VAT</th>
+                <th>Kwota VAT</th>
+                <th>Wartość brutto</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for product in invoice.products %}
+                <tr class="product_row">
+                    <td>1</td>
+                    <td class="product_name">{{ product.productName }}</td>
+                    <td class="product_quantity">{{ product.productQuantity }}</td>
+                    <td class="netto_price">{{ product.nettoPrice }}</td>
+                    <td class="netto_value">{{ product.nettoValue }}</td>
+                    <td class="vat">{{ product.vat }}</td>
+                    <td class="vat_value">{{ product.vatValue }}</td>
+                    <td class="brutto_value">{{ product.bruttoValue }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div id="comment"><p class="text-center">{{ invoice.comment }}</p></div>
+    <div class="col-sm-12" id="sum">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6"><table class="table">
+                <thead>
+                <tr>
+                    <th>VAT</th>
+                    <th>Suma Netto</th>
+                    <th>Suma VAT</th>
+                    <th>Suma Brutto</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>23%</td>
+                    <td id="netto_sum"></td>
+                    <td id="vat_sum"></td>
+                    <td id="brutto_sum"></td>
+                </tr>
+                </tbody>
+            </table></div>
+    </div>
+    <div class="col-sm-12"><hr></div>
+    <div class="col-sm-12">
+        <a href="{{ path('generatePDF',{'id': invoice.id} ) }}">Generuj PDF</a>
+    </div>
+</div>
+
+
+{#<script type="text/javascript" src="{{ absolute_url(asset('js/jquery-3.1.1.min.js')) }}"></script>#}
+{#<script type="text/javascript" src="{{ absolute_url(asset('js/bootstrap.min.js')) }}"></script>#}
+{#<script type="text/javascript" src="{{ absolute_url(asset('js/app.js')) }}"></script>#}
+</body>
+</html>

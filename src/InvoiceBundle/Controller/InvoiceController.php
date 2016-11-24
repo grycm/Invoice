@@ -82,7 +82,7 @@ class InvoiceController extends Controller
         $client->setclientPostal($clientPostal);
         $client->setclientNIP($clientNIP);
 
-        //add Seller and Clinet
+        //add Invoice, Seller and Clinet
         $em->persist($seller);
         $em->persist($client);
         $invoice->setClient($client);
@@ -122,18 +122,30 @@ class InvoiceController extends Controller
     }
 
 
+    /**
+     * @Route("/show/{id}")
+     * @Method("GET")
+     * @Template
+     */
+    public function showInvoiceAction($id)
+    {
+        $repo = $this->getDoctrine()->getRepository('InvoiceBundle:Invoice');
+        $invoice = $repo->find($id);
 
-
+        return ['invoice' => $invoice];
+    }
 
     /**
-     * Export to PDF
-     *
-     * @Route("/pdf", name="acme_demo_pdf")
+     * @Route("/pdf/{id}", name="generatePDF")
+     * @Method("GET")
      */
-    public function pdfAction()
-    {
-        $html = $this->renderView('InvoiceBundle:Invoice:new.html.twig');
 
+    public function generatePdfAction($id)
+    {
+        $repo = $this->getDoctrine()->getRepository('InvoiceBundle:Invoice');
+        $invoice = $repo->find($id);
+
+        $html = $this->renderView('InvoiceBundle:Invoice:showInvoice.html.twig', ['invoice' => $invoice]);
         $filename = sprintf('test-%s.pdf', date('Y-m-d'));
 
         return new Response(
@@ -144,5 +156,27 @@ class InvoiceController extends Controller
                 'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
             ]
         );
+
     }
+
+    /**
+     * Export to PDF
+     *
+     * @Route("/pdf", name="acme_demo_pdf")
+     */
+//    public function pdfAction()
+//    {
+//        $html = $this->renderView('InvoiceBundle:Invoice:new.html.twig');
+//
+//        $filename = sprintf('test-%s.pdf', date('Y-m-d'));
+//
+//        return new Response(
+//            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+//            200,
+//            [
+//                'Content-Type'        => 'application/pdf',
+//                'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
+//            ]
+//        );
+//    }
 }

@@ -10,7 +10,6 @@ $(function () {
 
         for (var row of rows) {
 
-            console.log(row);
             var productQuantity = $(row).find('.product_quantity > input').val();
             var nettoPrice = $(row).find('.netto_price > input').val();
             var vat = $(row).find('.vat > input').val();
@@ -23,6 +22,14 @@ $(function () {
             $(row).find('.vat_value > input').val(vatValue);
 
         }
+
+        var nettoValues = $('.netto_value > input');
+        var vatValues = $('.vat_value > input');
+        var bruttoValues = $('.brutto_value > input');
+
+        $('#netto_sum').text(getSum(nettoValues));
+        $('#vat_sum').text(getSum(vatValues));
+        $('#brutto_sum').text(getSum(bruttoValues));
     });
 
     addBtn.on('click', function (e) {
@@ -41,4 +48,13 @@ $(function () {
         lp++
     });
 
+    function getSum(object) {
+        var sum = 0;
+
+        for (var value of object) {
+            sum += parseInt($(value).val());
+        }
+
+        return sum;
+    }
 });
