@@ -7,38 +7,81 @@ Nowa faktura
 
 <form class="form-horizontal" method="POST">
     <div id="header">
-        <div class="col-sm-6">
-            <div class="form-group col-sm-12"><label class="col-sm-3">Faktura nr: </label><input type="text" class="col-sm-9" name="invoice_number"></div>
+        <div class="col-lg-6">
+            <div class="form-group col-lg-12">
+                <label class="col-lg-3 control-label">Faktura nr: </label>
+                <div class="col-lg-9"><input type="text" class="form-control" name="invoice_number"></div>
+            </div>
         </div>
-        <div class="col-sm-6">
-            <div class="form-group col-sm-12"><label class="col-sm-6">Data wystawienia:</label><input type="date" class="col-sm-6" name="generation_date"></div>
-            <div class="form-group col-sm-12"><label class="col-sm-6">Data zakończenia usługi:</label><input type="date" class="col-sm-6" name="completion_date"></div>
-            <div class="form-group col-sm-12"><label class="col-sm-6">Miejsce wystawienia</label><input type="text" class="col-sm-6" name="place"></div>
+        <div class="col-lg-6">
+            <div class="form-group col-lg-12">
+                <label class="col-lg-3 control-label">Data wystawienia:</label>
+                <div class="col-lg-9"><input type="date" class="form-control"" name="generation_date"></div>
+            </div>
+            <div class="form-group col-lg-12">
+                <label class="col-lg-3 control-label">Data zakończenia usługi:</label>
+                <div class="col-lg-9"><input type="date" class="form-control" name="completion_date"></div>
+            </div>
+            <div class="form-group col-lg-12">
+                <label class="col-lg-3 control-label">Miejsce wystawienia</label>
+                <div class="col-lg-9"><input type="text" class="form-control" name="place"></div>
+            </div>
         </div>
     </div>
-    <div class="col-sm-12"><hr></div>
+    <div class="col-lg-12"><hr></div>
     <div id="data">
-        <div class="col-sm-6" id="seller">
+
+        <div class="col-lg-6" id="seller">
             <h3>Sprzedawca:</h3>
-            <div class="form-group col-sm-12"><label class="col-sm-3">Nazwa</label><input type="text" class="col-sm-9" name="seller_name"></div>
-            <div class="form-group col-sm-12"><label class="col-sm-3">Adres</label><input type="text" class="col-sm-9" name="seller_address"></div>
-            <div class="form-group col-sm-12"><label class="col-sm-3">Miejscowość</label><input type="text" class="col-sm-9" name="seller_city"></div>
-            <div class="form-group col-sm-12"><label class="col-sm-3">Kod pocztowy</label><input type="text" class="col-sm-9" name="seller_postal"></div>
-            <div class="form-group col-sm-12"><label class="col-sm-3">NIP</label><input type="text" name="seller_NIP"></div>
+            <div class="form-group col-lg-12">
+                <label class="col-lg-3 control-label">Nazwa</label>
+                <div class="col-lg-9"><input class="form-control" type="text" name="seller_name" id="seller_name"></div>
+            </div>
+            <div class="form-group col-lg-12">
+                <label class="col-lg-3 control-label">Adres</label>
+                <div class="col-lg-9"><input class="form-control" type="text" name="seller_address"></div>
+            </div>
+            <div class="form-group col-lg-12">
+                <label class="col-lg-3 control-label">Miejscowość</label>
+                <div class="col-lg-9"><input class="form-control" type="text" name="seller_city"></div>
+            </div>
+            <div class="form-group col-lg-12">
+                <label class="col-lg-3 control-label">Kod pocztowy</label>
+                <div class="col-lg-9"><input class="form-control" type="text" name="seller_postal"></div>
+            </div>
+            <div class="form-group col-lg-12">
+                <label class="col-lg-3 control-label">NIP</label>
+                <div class="col-lg-9"><input class="form-control" type="text" name="seller_NIP"></div>
+            </div>
         </div>
 
-        <div class="col-sm-6" id="seller">
+        <div class="col-lg-6" id="seller">
             <h3>Nabywca:</h3>
-            <div class="form-group col-sm-12"><label class="col-sm-3">Nazwa</label><input type="text" class="col-sm-9" name="client_name"></div>
-            <div class="form-group col-sm-12"><label class="col-sm-3">Adres</label><input type="text" class="col-sm-9" name="client_address"></div>
-            <div class="form-group col-sm-12"><label class="col-sm-3">Miejscowość</label><input type="text" class="col-sm-9" name="client_city"></div>
-            <div class="form-group col-sm-12"><label class="col-sm-3">Kod pocztowy</label><input type="text" class="col-sm-9" name="client_NIP"></div>
-            <div class="form-group col-sm-12"><label class="col-sm-3">NIP</label><input type="text"></div>
+            <div class="form-group col-lg-12">
+                <label class="col-lg-3 control-label">Nazwa</label>
+                <div class="col-lg-9"><input class="form-control" type="text" name="client_name" id="client_name"></div>
+            </div>
+            <div class="form-group col-lg-12">
+                <label class="col-lg-3 control-label">Adres</label>
+                <div class="col-lg-9"><input class="form-control" type="text" name="client_address"></div>
+            </div>
+            <div class="form-group col-lg-12">
+                <label class="col-lg-3 control-label">Miejscowość</label>
+                <div class="col-lg-9"><input class="form-control" type="text" name="client_city"></div>
+            </div>
+            <div class="form-group col-lg-12">
+                <label class="col-lg-3 control-label">Kod pocztowy</label>
+                <div class="col-lg-9"><input class="form-control" type="text" name="client_postal"></div>
+            </div>
+            <div class="form-group col-lg-12">
+                <label class="col-lg-3 control-label">NIP</label>
+                <div class="col-lg-9"><input class="form-control" type="text" name="client_NIP"></div>
+            </div>
         </div>
     </div>
-    <div class="col-sm-12"><hr></div>
-    <div class="col-sm-12" id="table">
-        <table id="products" class="table">
+    <div class="col-lg-12"><hr></div>
+    <div class="col-lg-12 table-responsive" id="table">
+        <table id="products" class="table col-lg-12">
             <thead>
             <tr>
                 <th>Lp.</th>
@@ -54,46 +97,65 @@ Nowa faktura
             <tbody>
                 <tr class="product_row">
                     <td>1</td>
-                    <td class="product_name"><input type="text" name="product_name[]"></td>
-                    <td class="product_quantity"><input type="number" name="product_quantity[]"></td>
-                    <td class="netto_price"><input type="number" name="netto_price[]"></td>
-                    <td class="netto_value"><input type="number" disabled="disabled" name="netto_value[]"></td>
-                    <td class="vat"><input type="number" value="23" disabled="disabled" name="vat[]"></td>
-                    <td class="vat_value"><input type="number" disabled="disabled" name="vat_value[]"></td>
-                    <td class="brutto_value"><input type="number" disabled="disabled" name="brutto_value[]"></td>
+                    <td class="product_name">
+                        <input type="text" name="product[0][product_name]">
+                    </td>
+                    <td class="product_quantity">
+                        <input type="number" name="product[0][product_quantity]">
+                    </td>
+                    <td class="netto_price">
+                        <input type="number" name="product[0][netto_price]">
+                        </td>
+                    <td class="netto_value">
+                        <input type="number" readonly="readonly" name="product[0][netto_value]">
+                    </td>
+                    <td class="vat">
+                        <input type="number" value="23" readonly="readonly" name="product[0][vat]">
+                    </td>
+                    <td class="vat_value">
+                        <input type="number" readonly="readonly" name="product[0][vat_value]">
+                    </td>
+                    <td class="brutto_value">
+                        <input type="number" readonly="readonly" name="product[0][brutto_value]">
+                    </td>
                 </tr>
             </tbody>
         </table>
         <button class="btn" id="count_btn">Przelicz</button>
         <button class="btn" id="add_btn">Dodaj wiersz</button>
     </div>
-    <div class="col-sm-12" id="sum">
-        <div class="col-sm-6"></div>
-        <div class="col-sm-6"><table class="table">
+    <div class="col-lg-12" id="sum">
+        <div class="col-lg-6"></div>
+        <div class="col-lg-6"><table class="table">
             <thead>
             <tr>
                 <th>VAT</th>
-                <th>Wartość Netto</th>
-                <th>Wartość VAT</th>
-                <th>Wartość Brutto</th>
+                <th>Suma Netto</th>
+                <th>Suma VAT</th>
+                <th>Suma Brutto</th>
             </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>23%</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td id="netto_sum"></td>
+                    <td id="vat_sum"></td>
+                    <td id="brutto_sum"></td>
                 </tr>
             </tbody>
         </table></div>
     </div>
-    <div class="col-sm-12"><hr></div>
-    <div class="col-sm-12">
-        <p>Uwagi</p>
-        <textarea class="col-sm-12"></textarea>
+    <div class="col-lg-12"><hr></div>
+    <div class="col-lg-12">
+        <label for="comment" class="control-label">Uwagi</label>
+        <textarea class="form-control col-lg-12" name="comment" placeholder="Np. informacja o zwolnieniu z VAT"></textarea>
     </div>
-    <input type="submit" value="Generuj" class="btn">
+    <div class="col-lg-12">
+        <hr>
+    </div>
+    <div class="col-lg-12">
+        <p><input type="submit" value="Generuj" class="btn"></p>
+    </div>
 </form>
 
 </div>

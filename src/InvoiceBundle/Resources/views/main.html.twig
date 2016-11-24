@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ absolute_url(asset('css/bootstrap.min.css')) }}">
     <link rel="stylesheet" href="{{ absolute_url(asset('css/bootstrap-theme.min.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/easy-autocomplete.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/easy-autocomplete.themes.min.css') }}">
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -11,5 +13,6 @@
 <script type="text/javascript" src="{{ absolute_url(asset('js/jquery-3.1.1.min.js')) }}"></script>
 <script type="text/javascript" src="{{ absolute_url(asset('js/bootstrap.min.js')) }}"></script>
 <script type="text/javascript" src="{{ absolute_url(asset('js/app.js')) }}"></script>
+<script src="{{ asset('js/jquery.easy-autocomplete.min.js') }}"></script>
 </body>
 </html>
