@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -157,6 +158,72 @@ class InvoiceController extends Controller
             ]
         );
 
+    }
+
+    /**
+     * @Route("/api/seller_search")
+     *
+     */
+    public function sellerSearchAction(Request $request)
+    {
+
+        $phrase = $request->request->get('phrase');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery(
+            'SELECT seller FROM InvoiceBundle:Seller seller WHERE seller.sellerName LIKE :name'
+        )->setParameter('name', "%$phrase%");
+
+        $sellers = $query->getResult();
+
+        $response =[];
+        foreach ($sellers as $seller) {
+            $response[] = [
+                'sellerName' => $seller->getSellerName(),
+                'id' => $seller->getId(),
+                'sellerAddress' => $seller->getSellerAddress(),
+                'sellerCity' => $seller->getSellerCity(),
+                'sellerPostal'=> $seller->getSellerPostal(),
+                'sellerNIP' => $seller->getSellerNIP(),
+            ];
+        }
+
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/api/client_search")
+     *
+     */
+    public function clientSearchAction(Request $request)
+    {
+
+        $phrase = $request->request->get('phrase');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery(
+            'SELECT client FROM InvoiceBundle:Client client WHERE client.clientName LIKE :name'
+        )->setParameter('name', "%$phrase%");
+
+        $clients = $query->getResult();
+
+        $response =[];
+        foreach ($clients as $client) {
+            $response[] = [
+                'clientName' => $client->getClientName(),
+                'id' => $client->getId(),
+                'clientAddress' => $client->getClientAddress(),
+                'clientCity' => $client->getClientCity(),
+                'clientPostal'=> $client->getClientPostal(),
+                'clientNIP' => $client->getClientNIP(),
+            ];
+        }
+
+
+        return new JsonResponse($response);
     }
 
     /**

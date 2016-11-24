@@ -58,4 +58,83 @@ $(function () {
         return sum;
     }
 
+    var optionsSeller = {
+
+        url: function(phrase) {
+            return "api/seller_search";
+        },
+
+        list: {
+
+            onChooseEvent: function () {
+                var data = $("#seller_name").getSelectedItemData();
+                //$("input[name='seller_name']").val(data.sellerName);
+                $("input[name='seller_address']").val(data.sellerAddress);
+                $("input[name='seller_city']").val(data.sellerCity);
+                $("input[name='seller_postal']").val(data.sellerPostal);
+                $("input[name='seller_NIP']").val(data.sellerNIP);
+            }
+        },
+
+        getValue: function(element) {
+            return element.sellerName;
+        },
+
+        ajaxSettings: {
+            dataType: "json",
+            method: "POST",
+            data: {
+                dataType: "json"
+            }
+        },
+
+        preparePostData: function(data) {
+            data.phrase = $("#seller_name").val();
+            return data;
+        },
+
+        requestDelay: 400
+    };
+
+    var optionsClient = {
+
+        url: function(phrase) {
+            return "api/client_search";
+        },
+
+        list: {
+
+            onChooseEvent: function () {
+                var data = $("#client_name").getSelectedItemData();
+                //$("input[name='seller_name']").val(data.sellerName);
+                $("input[name='client_address']").val(data.clientAddress);
+                $("input[name='client_city']").val(data.clientCity);
+                $("input[name='client_postal']").val(data.clientPostal);
+                $("input[name='client_NIP']").val(data.clientNIP);
+            }
+        },
+
+        getValue: function(element) {
+            return element.clientName;
+        },
+
+        ajaxSettings: {
+            dataType: "json",
+            method: "POST",
+            data: {
+                dataType: "json"
+            }
+        },
+
+        preparePostData: function(data) {
+            data.phrase = $("#client_name").val();
+            return data;
+        },
+
+        requestDelay: 400
+    };
+
+    $("#seller_name").easyAutocomplete(optionsSeller);
+    $("#client_name").easyAutocomplete(optionsClient);
+
 });
