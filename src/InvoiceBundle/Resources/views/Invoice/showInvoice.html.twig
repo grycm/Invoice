@@ -2,8 +2,14 @@
 <html>
 <head>
     <meta charset="utf-8">
-    {#<link rel="stylesheet" href="{{ absolute_url(asset('css/bootstrap.min.css')) }}">#}
-    {#<link rel="stylesheet" href="{{ absolute_url(asset('css/bootstrap-theme.min.css')) }}">#}
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <title>Faktura {{ invoice.invoiceNumber }}</title>
 
 </head>
@@ -11,38 +17,38 @@
 
 <div class="container">
     <div id="header">
-        <div class="col-sm-6">
-            <div class="form-group col-sm-12"><label class="col-sm-3">Faktura nr: </label><div class="col-sm-9">{{ invoice.invoiceNumber }}</div></div>
+        <div class="col-xs-6">
+            <div class="form-group col-xs-12"><label class="col-xs-3">Faktura nr: </label><div class="col-xs-9">{{ invoice.invoiceNumber }}</div></div>
         </div>
-        <div class="col-sm-6">
-            <div class="form-group col-sm-12"><label class="col-sm-6">Data wystawienia:</label><div class="col-sm-6">{{ invoice.generationDate }}</div></div>
-            <div class="form-group col-sm-12"><label class="col-sm-6">Data zakończenia usługi:</label><div class="col-sm-6">{{ invoice.completionDate }}</div></div>
-            <div class="form-group col-sm-12"><label class="col-sm-6">Miejsce wystawienia</label><div class="col-sm-6">{{ invoice.place }}</div></div>
+        <div class="col-xs-6">
+            <div class="form-group col-xs-12"><label class="col-xs-6">Data wystawienia:</label><div class="col-xs-6">{{ invoice.generationDate }}</div></div>
+            <div class="form-group col-xs-12"><label class="col-xs-6">Data zakończenia usługi:</label><div class="col-xs-6">{{ invoice.completionDate }}</div></div>
+            <div class="form-group col-xs-12"><label class="col-xs-6">Miejsce wystawienia</label><div class="col-xs-6">{{ invoice.place }}</div></div>
         </div>
     </div>
-    <div class="col-sm-12"><hr></div>
+    <div class="col-xs-12"><hr></div>
     <div id="data">
 
-        <div class="col-sm-6" id="seller">
+        <div class="col-xs-6" id="seller">
             <h3>Sprzedawca:</h3>
-            <div class="form-group col-sm-12"><label class="col-sm-3">Nazwa</label><div class="col-sm-9"></div>{{ invoice.seller.sellerName }}</div>
-            <div class="form-group col-sm-12"><label class="col-sm-3">Adres</label><div class="col-sm-9">{{ invoice.seller.sellerAddress }}</div></div>
-                <div class="form-group col-sm-12"><label class="col-sm-3">Miejscowość</label><div>{{ invoice.seller.sellerCity }}</div></div>
-            <div class="form-group col-sm-12"><label class="col-sm-3">Kod pocztowy</label><div>{{ invoice.seller.sellerPostal }}</div></div>
-                <div class="form-group col-sm-12"><label class="col-sm-3">NIP</label><div>{{ invoice.seller.sellerNIP }}</div></div>
+            <div class="form-group col-xs-12"><label class="col-xs-6">Nazwa</label><div class="col-xs-6"></div>{{ invoice.seller.sellerName }}</div>
+            <div class="form-group col-xs-12"><label class="col-xs-6">Adres</label><div class="col-xs-6">{{ invoice.seller.sellerAddress }}</div></div>
+                <div class="form-group col-xs-12"><label class="col-xs-6">Miejscowość</label><div>{{ invoice.seller.sellerCity }}</div></div>
+            <div class="form-group col-xs-12"><label class="col-xs-6">Kod pocztowy</label><div>{{ invoice.seller.sellerPostal }}</div></div>
+                <div class="form-group col-xs-12"><label class="col-xs-6">NIP</label><div>{{ invoice.seller.sellerNIP }}</div></div>
         </div>
 
-        <div class="col-sm-6" id="client">
+        <div class="col-xs-6" id="client">
             <h3>Nabywca:</h3>
-            <div class="form-group col-sm-12"><label class="col-sm-3">Nazwa</label><div class="col-sm-9"></div>{{ invoice.client.clientName }}</div>
-            <div class="form-group col-sm-12"><label class="col-sm-3">Adres</label><div class="col-sm-9">{{ invoice.client.clientAddress }}</div></div>
-            <div class="form-group col-sm-12"><label class="col-sm-3">Miejscowość</label><div>{{ invoice.client.clientCity }}</div></div>
-            <div class="form-group col-sm-12"><label class="col-sm-3">Kod pocztowy</label><div>{{ invoice.client.clientPostal }}</div></div>
-            <div class="form-group col-sm-12"><label class="col-sm-3">NIP</label><div>{{ invoice.client.clientNIP }}</div></div>
+            <div class="form-group col-xs-12"><label class="col-xs-6">Nazwa</label><div class="col-xs-6"></div>{{ invoice.client.clientName }}</div>
+            <div class="form-group col-xs-12"><label class="col-xs-6">Adres</label><div class="col-xs-6">{{ invoice.client.clientAddress }}</div></div>
+            <div class="form-group col-xs-12"><label class="col-xs-6">Miejscowość</label><div>{{ invoice.client.clientCity }}</div></div>
+            <div class="form-group col-xs-12"><label class="col-xs-6">Kod pocztowy</label><div>{{ invoice.client.clientPostal }}</div></div>
+            <div class="form-group col-xs-12"><label class="col-xs-6">NIP</label><div>{{ invoice.client.clientNIP }}</div></div>
         </div>
     </div>
-    <div class="col-sm-12"><hr></div>
-    <div class="col-sm-12" id="table">
+    <div class="col-xs-12"><hr></div>
+    <div class="col-xs-12" id="table">
         <table id="products" class="table">
             <thead>
             <tr>
@@ -74,9 +80,9 @@
         </table>
     </div>
     <div id="comment"><p class="text-center">{{ invoice.comment }}</p></div>
-    <div class="col-sm-12" id="sum">
-        <div class="col-sm-6"></div>
-        <div class="col-sm-6"><table class="table">
+    <div class="col-xs-12" id="sum">
+        <div class="col-xs-6"></div>
+        <div class="col-xs-6"><table class="table">
                 <thead>
                 <tr>
                     <th>VAT</th>
@@ -95,15 +101,10 @@
                 </tbody>
             </table></div>
     </div>
-    <div class="col-sm-12"><hr></div>
-    <div class="col-sm-12">
+    <div class="col-xs-12"><hr></div>
+    <div class="col-xs-12">
         <a href="{{ path('generatePDF',{'id': invoice.id} ) }}">Generuj PDF</a>
     </div>
 </div>
-
-
-{#<script type="text/javascript" src="{{ absolute_url(asset('js/jquery-3.1.1.min.js')) }}"></script>#}
-{#<script type="text/javascript" src="{{ absolute_url(asset('js/bootstrap.min.js')) }}"></script>#}
-{#<script type="text/javascript" src="{{ absolute_url(asset('js/app.js')) }}"></script>#}
 </body>
 </html>
