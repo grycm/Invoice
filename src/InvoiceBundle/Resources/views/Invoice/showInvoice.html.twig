@@ -79,7 +79,7 @@
                     <td class="product_quantity">{{ product.productQuantity }}</td>
                     <td class="netto_price">{{ product.nettoPrice }}</td>
                     <td class="netto_value">{{ product.nettoValue }}</td>
-                    <td class="vat">{{ product.vat }}</td>
+                    <td class="vat">{{ product.vat * 100 }}%</td>
                     <td class="vat_value">{{ product.vatValue }}</td>
                     <td class="brutto_value">{{ product.bruttoValue }}</td>
                 </tr>
@@ -136,7 +136,7 @@
     {% else %}
     <footer class="footer">
         <div class="container">
-        podpis
+        <br><br><br><br><br>podpis
         </div>
     </footer>
     {% endif %}
