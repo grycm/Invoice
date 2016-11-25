@@ -118,13 +118,12 @@ class InvoiceController extends Controller
         $em->persist($invoice);
         $em->flush();
 
-        return [];
-        //return $this->redirectToRoute('newInvoice');
+        return $this->redirectToRoute('showInvoice', ['id' => $invoice->getId()]);
     }
 
 
     /**
-     * @Route("/show/{id}")
+     * @Route("/show/{id}", name="showInvoice")
      * @Method("GET")
      * @Template
      */
@@ -224,6 +223,25 @@ class InvoiceController extends Controller
 
 
         return new JsonResponse($response);
+    }
+    
+    /**
+     * 
+     * @Route("/showAll", name="showAll")
+     * @Template
+     */
+    public function showAllAction()
+    {
+        $repo = $this->getDoctrine()->getRepository('InvoiceBundle:Invoice');
+        
+        $invoices = $repo->findAll();
+        
+        return ['invoices' => $invoices];
+    }
+    
+    public function showExceptionAction()
+    {
+        return $this->redirect('/snake/index.html');
     }
 
     /**

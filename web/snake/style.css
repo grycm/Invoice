@@ -1,0 +1,25 @@
+table {
+    border: 1px black solid;
+    border-collapse: collapse;
+}
+td {
+    width: 1em;
+    height: 1em;
+}
+.map {
+    background-color: white;
+}
+.snake, .food {
+    background-color: red;
+}
+.food {
+    background-color: blue;
+}
+.blur {
+  margin: -20px auto;
+  filter: blur(10px);
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -o-filter: blur(10px);
+  -ms-filter: blur(10px);
+}
