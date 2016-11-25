@@ -9,6 +9,12 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+    <nav class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li><a href="{{ path('newInvoice') }}">Nowa faktura</a></li>
+            <li><a href="{{ path('showAll') }}">Pokaż wszystkie</a></li>
+        </ul>
+    </nav>
 {% block body %}{% endblock %}
 <script type="text/javascript" src="{{ absolute_url(asset('js/jquery-3.1.1.min.js')) }}"></script>
 <script type="text/javascript" src="{{ absolute_url(asset('js/bootstrap.min.js')) }}"></script>

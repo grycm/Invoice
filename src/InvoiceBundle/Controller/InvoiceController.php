@@ -19,6 +19,7 @@ class InvoiceController extends Controller
 
     /**
      * @Route("/new", name="newInvoice")
+     * @Route("/")
      * @Method("GET")
      * @Template
      */

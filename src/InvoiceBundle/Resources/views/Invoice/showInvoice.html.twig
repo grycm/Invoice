@@ -14,7 +14,15 @@
 
 </head>
 <body>
-
+{% if app.request.attributes.get('_route') == 'showInvoice' %}
+<nav class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li><a href="{{ path('newInvoice') }}">Nowa faktura</a></li>
+            <li><a href="{{ path('showAll') }}">Pokaż wszystkie</a></li>
+            <li class="active"><a href="{{ path('generatePDF',{'id': invoice.id} ) }}">Pobierz</a></li>
+        </ul>
+</nav>
+{% endif %}
 <div class="container">
     <div id="header">
         <div class="col-xs-6">
@@ -94,9 +102,27 @@
                 <tbody>
                 <tr>
                     <td>23%</td>
-                    <td id="netto_sum"></td>
-                    <td id="vat_sum"></td>
-                    <td id="brutto_sum"></td>
+                    <td id="netto_sum">
+                        {% set nettoSum = 0 %}
+                        {% for product in invoice.products %}
+                            {% set nettoSum = nettoSum + product.nettoValue %}
+                        {% endfor %}
+                        {{ nettoSum }}
+                    </td>
+                    <td id="vat_sum">
+                        {% set vatSum = 0 %}
+                        {% for product in invoice.products %}
+                            {% set vatSum = vatSum + product.vatValue%}
+                        {% endfor %}
+                        {{ vatSum }}
+                    </td>
+                    <td id="brutto_sum">
+                        {% set bruttoSum = 0 %}
+                        {% for product in invoice.products %}
+                            {% set bruttoSum = bruttoSum + product.bruttoValue%}
+                        {% endfor %}
+                        {{ bruttoSum }}
+                    </td>
                 </tr>
                 </tbody>
             </table></div>
