@@ -54,38 +54,53 @@ class InvoiceController extends Controller
         $invoice->setComment($comment);
 
         //get Seller Data
-        $sellerName = $request->request->get('seller_name');
-        $sellerAddress = $request->request->get('seller_address');
-        $sellerCity = $request->request->get('seller_city');
-        $sellerPostal = $request->request->get('seller_postal');
-        $sellerNIP = $request->request->get('seller_NIP');
+        $sellerRepo = $this->getDoctrine()->getRepository('InvoiceBundle:Seller');
+        $searchSeller = $sellerRepo->findOneBy(['sellerNIP' => $request->request->get('seller_NIP')]);
+        
+        if ( $searchSeller ) {
+            $seller = $searchSeller;
+        } else {
+            $sellerNIP = $request->request->get('seller_NIP');
+            $sellerName = $request->request->get('seller_name');
+            $sellerAddress = $request->request->get('seller_address');
+            $sellerCity = $request->request->get('seller_city');
+            $sellerPostal = $request->request->get('seller_postal');
 
-        //set Seller Data
-        $seller = new Seller();
-        $seller->setSellerName($sellerName);
-        $seller->setSellerAddress($sellerAddress);
-        $seller->setSellerCity($sellerCity);
-        $seller->setSellerPostal($sellerPostal);
-        $seller->setSellerNIP($sellerNIP);
-
+            //set Seller Data
+            $seller = new Seller();
+            $seller->setSellerName($sellerName);
+            $seller->setSellerAddress($sellerAddress);
+            $seller->setSellerCity($sellerCity);
+            $seller->setSellerPostal($sellerPostal);
+            $seller->setSellerNIP($sellerNIP);
+            
+            $em->persist($seller);
+        }
         //get Clinet Data
-        $clientName = $request->request->get('client_name');
-        $clientAddress = $request->request->get('client_address');
-        $clientCity = $request->request->get('client_city');
-        $clientPostal = $request->request->get('client_postal');
-        $clientNIP = $request->request->get('client_NIP');
+        $clientRepo = $this->getDoctrine()->getRepository('InvoiceBundle:Client');
+        $searchClient = $clientRepo->findOneBy(['clientNIP' => $request->request->get('client_NIP')]);
+        
+        if ( $searchClient ) {
+            $client = $searchClient;
+        } else {
+            $clientName = $request->request->get('client_name');
+            $clientAddress = $request->request->get('client_address');
+            $clientCity = $request->request->get('client_city');
+            $clientPostal = $request->request->get('client_postal');
+            $clientNIP = $request->request->get('client_NIP');
 
-        //set Client Data
-        $client = new Client();
-        $client->setclientName($clientName);
-        $client->setclientAddress($clientAddress);
-        $client->setclientCity($clientCity);
-        $client->setclientPostal($clientPostal);
-        $client->setclientNIP($clientNIP);
-
+            //set Client Data
+            $client = new Client();
+            $client->setclientName($clientName);
+            $client->setclientAddress($clientAddress);
+            $client->setclientCity($clientCity);
+            $client->setclientPostal($clientPostal);
+            $client->setclientNIP($clientNIP);
+            
+            $em->persist($client);
+        }
         //add Invoice, Seller and Clinet
-        $em->persist($seller);
-        $em->persist($client);
+        
         $invoice->setClient($client);
         $invoice->setSeller($seller);
 
@@ -118,13 +133,12 @@ class InvoiceController extends Controller
         $em->persist($invoice);
         $em->flush();
 
-        return [];
-        //return $this->redirectToRoute('newInvoice');
+        return $this->redirectToRoute('showInvoice', ['id' => $invoice->getId()]);
     }
 
 
     /**
-     * @Route("/show/{id}")
+     * @Route("/show/{id}", name="showInvoice")
      * @Method("GET")
      * @Template
      */
@@ -224,6 +238,25 @@ class InvoiceController extends Controller
 
 
         return new JsonResponse($response);
+    }
+    
+    /**
+     * 
+     * @Route("/showAll", name="showAll")
+     * @Template
+     */
+    public function showAllAction()
+    {
+        $repo = $this->getDoctrine()->getRepository('InvoiceBundle:Invoice');
+        
+        $invoices = $repo->findAll();
+        
+        return ['invoices' => $invoices];
+    }
+    
+    public function showExceptionAction()
+    {
+        return $this->redirect('/snake/index.html');
     }
 
     /**

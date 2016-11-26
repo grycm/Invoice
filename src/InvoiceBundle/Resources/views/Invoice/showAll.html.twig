@@ -1,0 +1,30 @@
+{% extends "InvoiceBundle::main.html.twig" %}
+{% block title %}
+Wszystkie faktury
+{% endblock %}
+{% block body %}
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <th>Nr</th>
+            <th>Data wystawienia</th>
+            <th>Sprzedawca</th>
+            <th>Odbiorca</th>
+            <th></th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for invoice in invoices %}
+            <tr>
+                <td>{{ invoice.invoiceNumber }}</td>
+                <td>{{ invoice.generationDate }}</td>
+                <td>{{ invoice.seller.sellerName }} ({{ invoice.seller.sellerNIP }})</td>
+                <td>{{ invoice.client.clientName }} ({{ invoice.client.clientNIP }})</td>
+                <td><a class="btn" href="{{ path('showInvoice', {'id' : invoice.id}) }}">Pokaż</a></td>
+                <td><a class="btn" href="{{ path('generatePDF', {'id' : invoice.id}) }}">Pobierz</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -35,6 +35,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+#    snake easer egg
+#    exception_controller:  InvoiceBundle:Invoice:showException
 
 # Doctrine Configuration
 doctrine:
