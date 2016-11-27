@@ -37,13 +37,13 @@ $(function () {
 
         $('#products > tbody').append('<tr class="product_row">'+
             '<td>' + (parseInt(lp)+parseInt(1)) + '</td>'+
-            '<td class="product_name"><input type="text" name="product['+lp+'][product_name]"></td>'+
-            '<td class="product_quantity"><input type="number" name="product['+lp+'][product_quantity]"></td>'+
-            '<td class="netto_price"><input type="number" name="product['+lp+'][netto_price]"></td>'+
-            '<td class="netto_value"><input type="number" readonly="readonly" name="product['+lp+'][netto_value]"></td>'+
-            '<td class="vat"><input type="number" value="23" readonly="readonly" name="product['+lp+'][vat]"></td>'+
-            '<td class="vat_value"><input type="number" readonly="readonly" name="product['+lp+'][vat_value]"></td>'+
-            '<td class="brutto_value"><input type="number" readonly="readonly" name="product['+lp+'][brutto_value]"></td>'+
+            '<td class="product_name"><input type="text" class="form-control" name="product['+lp+'][product_name]"></td>'+
+            '<td class="product_quantity"><input type="number" class="form-control" name="product['+lp+'][product_quantity]"></td>'+
+            '<td class="netto_price"><input type="number" class="form-control" name="product['+lp+'][netto_price]"></td>'+
+            '<td class="netto_value"><input type="number" class="form-control" readonly="readonly" name="product['+lp+'][netto_value]"></td>'+
+            '<td class="vat"><input type="number" class="form-control" value="23" readonly="readonly" name="product['+lp+'][vat]"></td>'+
+            '<td class="vat_value"><input type="number" class="form-control" readonly="readonly" name="product['+lp+'][vat_value]"></td>'+
+            '<td class="brutto_value"><input type="number" class="form-control" readonly="readonly" name="product['+lp+'][brutto_value]"></td>'+
             '</tr>');
         lp++
     });

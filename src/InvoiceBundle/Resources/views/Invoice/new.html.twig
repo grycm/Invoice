@@ -83,40 +83,40 @@ Nowa faktura
     <div class="col-lg-12 table-responsive" id="table">
         <table id="products" class="table col-lg-12">
             <thead>
-            <tr>
-                <th>Lp.</th>
-                <th>Nazwa towaru/usługi</th>
-                <th>Ilość</th>
-                <th>Cena netto</th>
-                <th>Wartość netto</th>
-                <th>Stawka VAT</th>
-                <th>Kwota VAT</th>
-                <th>Wartość brutto</th>
-            </tr>
+                <tr>
+                    <th class="text-center">Lp.</th>
+                    <th class="text-center">Nazwa towaru/usługi</th>
+                    <th class="text-center">Ilość</th>
+                    <th class="text-center">Cena netto</th>
+                    <th class="text-center">Wartość netto</th>
+                    <th class="text-center">Stawka VAT</th>
+                    <th class="text-center">Kwota VAT</th>
+                    <th class="text-center">Wartość brutto</th>
+                </tr>
             </thead>
             <tbody>
                 <tr class="product_row">
                     <td>1</td>
                     <td class="product_name">
-                        <input type="text" name="product[0][product_name]">
+                        <input type="text" class="form-control" name="product[0][product_name]">
                     </td>
                     <td class="product_quantity">
-                        <input type="number" name="product[0][product_quantity]">
+                        <input type="number" class="form-control" name="product[0][product_quantity]">
                     </td>
                     <td class="netto_price">
-                        <input type="number" name="product[0][netto_price]">
+                        <input type="number" class="form-control" name="product[0][netto_price]">
                         </td>
                     <td class="netto_value">
-                        <input type="number" readonly="readonly" name="product[0][netto_value]">
+                        <input type="number" class="form-control" readonly="readonly" name="product[0][netto_value]">
                     </td>
                     <td class="vat">
-                        <input type="number" value="23" readonly="readonly" name="product[0][vat]">
+                        <input type="number" class="form-control" value="23" readonly="readonly" name="product[0][vat]">
                     </td>
                     <td class="vat_value">
-                        <input type="number" readonly="readonly" name="product[0][vat_value]">
+                        <input type="number" class="form-control" readonly="readonly" name="product[0][vat_value]">
                     </td>
                     <td class="brutto_value">
-                        <input type="number" readonly="readonly" name="product[0][brutto_value]">
+                        <input type="number" class="form-control" readonly="readonly" name="product[0][brutto_value]">
                     </td>
                 </tr>
             </tbody>
