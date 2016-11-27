@@ -34,11 +34,67 @@ class InvoiceController extends Controller
     public function generateAction(Request $request)
     {
 
-        dump($request->request);
+        //dump($request->request);
         $em = $this->getDoctrine()->getManager();
 
-        //get Invoice data
-        $invoiceNumber = $request->request->get('invoice_number');
+        //get Invoice data from form
+        $invoice = $this->getInvoiceData($request);
+
+        //get Seller Data from form
+        $seller = $this->getSubjectData($request, 'seller');
+        $em->persist($seller);
+        
+        //get Clinet Data from form
+        $client = $this->getSubjectData($request, 'client');
+        $em->persist($client);
+        
+        //add Seller and Clinet to Invoice
+        $invoice->setClient($client);
+        $invoice->setSeller($seller);
+
+        foreach ($request->request->get('product') as $product) {
+            $pProduct = $this->getProductData($product);
+
+            //add Product to Invoice
+            $em->persist($pProduct);
+            $pProduct->setInvoice($invoice);
+        }
+
+
+        //flush everything
+        $em->persist($invoice);
+        $em->flush();
+
+        return $this->redirectToRoute('showInvoice', ['id' => $invoice->getId()]);
+    }
+
+
+    /*
+     * Use 'client' or 'seller' as $type, so you get
+     * 'seller_NIP' from $type.'_NIP' etc
+     */
+    private function getSubjectData(Request $request, $type)
+    {
+        $nip = $request->request->get($type.'_NIP');
+        $name = $request->request->get($type.'_name');
+        $address = $request->request->get($type.'_address');
+        $city = $request->request->get($type.'_city');
+        $zipCode = $request->request->get($type.'_postal');
+
+        //set Seller Data
+        $subject = new Subject();
+        $subject->setName($name);
+        $subject->setAddress($address);
+        $subject->setCity($city);
+        $subject->setZipCode($zipCode);
+        $subject->setNIP($nip);
+        
+        return $subject;
+    }
+    
+    private function getInvoiceData(Request $request)
+    {
+        $number = $request->request->get('invoice_number');
         $generationDate = $request->request->get('generation_date');
         $completionDate = $request->request->get('completion_date');
         $place = $request->request->get('place');
@@ -46,81 +102,36 @@ class InvoiceController extends Controller
 
         //set Invoice data
         $invoice = new Invoice();
-        $invoice->setNumber($invoiceNumber);
+        $invoice->setNumber($number);
         $invoice->setGenerationDate($generationDate);
         $invoice->setCompletionDate($completionDate);
         $invoice->setPlace($place);
         $invoice->setComment($comment);
-
-        //get Seller Data
-
         
-            $sellerNIP = $request->request->get('seller_NIP');
-            $sellerName = $request->request->get('seller_name');
-            $sellerAddress = $request->request->get('seller_address');
-            $sellerCity = $request->request->get('seller_city');
-            $sellerPostal = $request->request->get('seller_postal');
+        return $invoice;
+    }
+    
+    private function getProductData($product)
+    {
+        $pName = $product['product_name'];
+        $pQuantity = $product['product_quantity'];
+        $pNettoPrice = $product['netto_price'];
+        //for safety reasons, I calculate it again on server
+        $pNettoValue = $pQuantity * $pNettoPrice;
+        $pVat = $product['vat'] / 100;
+        $pVatValue = $pNettoValue * $pVat;
+        $pBruttoValue = $pNettoValue + $pVatValue;
 
-            //set Seller Data
-            $seller = new Subject();
-            $seller->setName($sellerName);
-            $seller->setAddress($sellerAddress);
-            $seller->setCity($sellerCity);
-            $seller->setZipCode($sellerPostal);
-            $seller->setNIP($sellerNIP);
-            
-            $em->persist($seller);
-        //get Clinet Data
-            $clientName = $request->request->get('client_name');
-            $clientAddress = $request->request->get('client_address');
-            $clientCity = $request->request->get('client_city');
-            $clientPostal = $request->request->get('client_postal');
-            $clientNIP = $request->request->get('client_NIP');
-
-            //set Client Data
-            $client = new Subject();
-            $client->setName($clientName);
-            $client->setAddress($clientAddress);
-            $client->setCity($clientCity);
-            $client->setZipCode($clientPostal);
-            $client->setNIP($clientNIP);
-            
-            $em->persist($client);
-        //add Invoice, Seller and Clinet
+        $pProduct = new Product();
+        $pProduct->setProductName($pName);
+        $pProduct->setProductQuantity($pQuantity);
+        $pProduct->setNettoPrice($pNettoPrice);
+        $pProduct->setNettoValue($pNettoValue);
+        $pProduct->setVat($pVat);
+        $pProduct->setVatValue($pVatValue);
+        $pProduct->setBruttoValue($pBruttoValue);
         
-        $invoice->setClient($client);
-        $invoice->setSeller($seller);
-
-        foreach ($request->request->get('product') as $product) {
-            $pName = $product['product_name'];
-            $pQuantity = $product['product_quantity'];
-            $pNettoPrice = $product['netto_price'];
-            //for safety reasons, I calculate it again on server
-            $pNettoValue = $pQuantity * $pNettoPrice;
-            $pVat = $product['vat'] / 100;
-            $pVatValue = $pNettoValue * $pVat;
-            $pBruttoValue = $pNettoValue + $pVatValue;
-
-            $pProduct = new Product();
-            $pProduct->setProductName($pName);
-            $pProduct->setProductQuantity($pQuantity);
-            $pProduct->setNettoPrice($pNettoPrice);
-            $pProduct->setNettoValue($pNettoValue);
-            $pProduct->setVat($pVat);
-            $pProduct->setVatValue($pVatValue);
-            $pProduct->setBruttoValue($pBruttoValue);
-
-            $em->persist($pProduct);
-
-            $pProduct->setInvoice($invoice);
-        }
-
-
-
-        $em->persist($invoice);
-        $em->flush();
-
-        return $this->redirectToRoute('showInvoice', ['id' => $invoice->getId()]);
+        return $pProduct;
     }
 
 
@@ -141,7 +152,6 @@ class InvoiceController extends Controller
      * @Route("/pdf/{id}", name="generatePDF")
      * @Method("GET")
      */
-
     public function generatePdfAction($id)
     {
         $repo = $this->getDoctrine()->getRepository('InvoiceBundle:Invoice');
