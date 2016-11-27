@@ -16,7 +16,7 @@ Wszystkie faktury
         <tbody>
             {% for invoice in invoices %}
             <tr>
-                <td>{{ invoice.invoiceNumber }}</td>
+                <td>{{ invoice.number }}</td>
                 <td>{{ invoice.generationDate }}</td>
                 <td>{{ invoice.seller.name }} ({{ invoice.seller.nip }})</td>
                 <td>{{ invoice.client.name }} ({{ invoice.client.nip }})</td>

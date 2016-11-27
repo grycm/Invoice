@@ -46,7 +46,7 @@ class InvoiceController extends Controller
 
         //set Invoice data
         $invoice = new Invoice();
-        $invoice->setInvoiceNumber($invoiceNumber);
+        $invoice->setNumber($invoiceNumber);
         $invoice->setGenerationDate($generationDate);
         $invoice->setCompletionDate($completionDate);
         $invoice->setPlace($place);

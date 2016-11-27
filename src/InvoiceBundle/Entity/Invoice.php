@@ -24,9 +24,9 @@ class Invoice
     /**
      * @var string
      *
-     * @ORM\Column(name="invoice_number", type="string", length=255)
+     * @ORM\Column(name="number", type="string", length=255)
      */
-    private $invoiceNumber;
+    private $number;
 
     /**
      * @var string
@@ -84,26 +84,26 @@ class Invoice
     }
 
     /**
-     * Set invoiceNumber
+     * Set number
      *
-     * @param string $invoiceNumber
+     * @param string $number
      * @return Invoice
      */
-    public function setInvoiceNumber($invoiceNumber)
+    public function setNumber($number)
     {
-        $this->invoiceNumber = $invoiceNumber;
+        $this->number = $number;
 
         return $this;
     }
 
     /**
-     * Get invoiceNumber
+     * Get number
      *
      * @return string 
      */
-    public function getInvoiceNumber()
+    public function getNumber()
     {
-        return $this->invoiceNumber;
+        return $this->number;
     }
 
     /**
