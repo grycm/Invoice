@@ -61,15 +61,14 @@ class Invoice
      */
     private $products;
 
-
     /**
-     * @ORM\ManyToOne(targetEntity="Seller", inversedBy="invoices")
+     * @ORM\ManyToOne(targetEntity="Subject", inversedBy="issuedInvoices")
      * @ORM\JoinColumn(name="seller_id", referencedColumnName="id")
      */
     private $seller;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Client", inversedBy="invoices")
+     * @ORM\ManyToOne(targetEntity="Subject", inversedBy="receivedInvoices")
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
      */
     private $client;
@@ -242,10 +241,10 @@ class Invoice
     /**
      * Set seller
      *
-     * @param \InvoiceBundle\Entity\Seller $seller
+     * @param \InvoiceBundle\Entity\Subject $seller
      * @return Invoice
      */
-    public function setSeller(\InvoiceBundle\Entity\Seller $seller = null)
+    public function setSeller(\InvoiceBundle\Entity\Subject $seller = null)
     {
         $this->seller = $seller;
 
@@ -255,7 +254,7 @@ class Invoice
     /**
      * Get seller
      *
-     * @return \InvoiceBundle\Entity\Seller 
+     * @return \InvoiceBundle\Entity\Subject 
      */
     public function getSeller()
     {
@@ -265,10 +264,10 @@ class Invoice
     /**
      * Set client
      *
-     * @param \InvoiceBundle\Entity\Client $client
+     * @param \InvoiceBundle\Entity\Subject $client
      * @return Invoice
      */
-    public function setClient(\InvoiceBundle\Entity\Client $client = null)
+    public function setClient(\InvoiceBundle\Entity\Subject $client = null)
     {
         $this->client = $client;
 
@@ -278,7 +277,7 @@ class Invoice
     /**
      * Get client
      *
-     * @return \InvoiceBundle\Entity\Client 
+     * @return \InvoiceBundle\Entity\Subject 
      */
     public function getClient()
     {

@@ -2,10 +2,9 @@
 
 namespace InvoiceBundle\Controller;
 
-use InvoiceBundle\Entity\Client;
 use InvoiceBundle\Entity\Invoice;
 use InvoiceBundle\Entity\Product;
-use InvoiceBundle\Entity\Seller;
+use InvoiceBundle\Entity\Subject;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -54,12 +53,8 @@ class InvoiceController extends Controller
         $invoice->setComment($comment);
 
         //get Seller Data
-        $sellerRepo = $this->getDoctrine()->getRepository('InvoiceBundle:Seller');
-        $searchSeller = $sellerRepo->findOneBy(['sellerNIP' => $request->request->get('seller_NIP')]);
+
         
-        if ( $searchSeller ) {
-            $seller = $searchSeller;
-        } else {
             $sellerNIP = $request->request->get('seller_NIP');
             $sellerName = $request->request->get('seller_name');
             $sellerAddress = $request->request->get('seller_address');
@@ -67,22 +62,15 @@ class InvoiceController extends Controller
             $sellerPostal = $request->request->get('seller_postal');
 
             //set Seller Data
-            $seller = new Seller();
-            $seller->setSellerName($sellerName);
-            $seller->setSellerAddress($sellerAddress);
-            $seller->setSellerCity($sellerCity);
-            $seller->setSellerPostal($sellerPostal);
-            $seller->setSellerNIP($sellerNIP);
+            $seller = new Subject();
+            $seller->setName($sellerName);
+            $seller->setAddress($sellerAddress);
+            $seller->setCity($sellerCity);
+            $seller->setZipCode($sellerPostal);
+            $seller->setNIP($sellerNIP);
             
             $em->persist($seller);
-        }
         //get Clinet Data
-        $clientRepo = $this->getDoctrine()->getRepository('InvoiceBundle:Client');
-        $searchClient = $clientRepo->findOneBy(['clientNIP' => $request->request->get('client_NIP')]);
-        
-        if ( $searchClient ) {
-            $client = $searchClient;
-        } else {
             $clientName = $request->request->get('client_name');
             $clientAddress = $request->request->get('client_address');
             $clientCity = $request->request->get('client_city');
@@ -90,15 +78,14 @@ class InvoiceController extends Controller
             $clientNIP = $request->request->get('client_NIP');
 
             //set Client Data
-            $client = new Client();
-            $client->setclientName($clientName);
-            $client->setclientAddress($clientAddress);
-            $client->setclientCity($clientCity);
-            $client->setclientPostal($clientPostal);
-            $client->setclientNIP($clientNIP);
+            $client = new Subject();
+            $client->setName($clientName);
+            $client->setAddress($clientAddress);
+            $client->setCity($clientCity);
+            $client->setZipCode($clientPostal);
+            $client->setNIP($clientNIP);
             
             $em->persist($client);
-        }
         //add Invoice, Seller and Clinet
         
         $invoice->setClient($client);
