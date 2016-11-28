@@ -5,7 +5,7 @@ Nowa faktura
 {% block body %}
 <div class="container">
 
-<form class="form-horizontal" method="POST">
+    <form class="form-horizontal" method="POST">
     <div id="header">
         <div class="col-lg-6">
             <div class="form-group col-lg-12">
@@ -123,7 +123,7 @@ Nowa faktura
                 </tr>
             </thead>
             <tbody>
-                <tr class="product_row">
+                <tr class="product_row" >
                     <td>1</td>
                     <td class="product_name">
                         {{ form_widget(form.products[0].name, {'attr': {'class' : 'form-control'}}) }}
@@ -149,8 +149,8 @@ Nowa faktura
                 </tr>
             </tbody>
         </table>
-        <button class="btn" id="count_btn">Przelicz</button>
-        <button class="btn" id="add_btn">Dodaj wiersz</button>
+        <button type="button" class="btn" id="count_btn">Przelicz</button>
+        <button type="button" class="btn" id="add_btn">Dodaj wiersz</button>
     </div>
     <div class="col-lg-12" id="sum">
         <div class="col-lg-6"></div>
@@ -177,7 +177,6 @@ Nowa faktura
     <div class="col-lg-12">
         <label for="comment" class="control-label">Uwagi</label>
         {{ form_widget(form.comment, {'attr': {'class': 'form-control'}}) }}
-        <textarea class="form-control col-lg-12" name="comment" placeholder="Np. informacja o zwolnieniu z VAT"></textarea>
     </div>
     <div class="col-lg-12">
         <hr>
