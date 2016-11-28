@@ -10,21 +10,29 @@ Nowa faktura
         <div class="col-lg-6">
             <div class="form-group col-lg-12">
                 <label class="col-lg-3 control-label">Faktura nr: </label>
-                <div class="col-lg-9"><input type="text" class="form-control" name="invoice_number"></div>
+                <div class="col-lg-9">
+                    {{ form_widget(form.number, {'attr': {'class' : 'form-control'}}) }}
+                </div>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group col-lg-12">
                 <label class="col-lg-3 control-label">Data wystawienia:</label>
-                <div class="col-lg-9"><input type="date" class="form-control"" name="generation_date"></div>
+                <div class="col-lg-9">
+                    {{ form_widget(form.generationDate, {'attr': {'class': 'form-control'}, 'type' : 'date'}) }}
+                </div>
             </div>
             <div class="form-group col-lg-12">
                 <label class="col-lg-3 control-label">Data zakończenia usługi:</label>
-                <div class="col-lg-9"><input type="date" class="form-control" name="completion_date"></div>
+                <div class="col-lg-9">
+                    {{ form_widget(form.completionDate, {'attr': {'class': 'form-control'}, 'type' : 'date'}) }}
+                </div>
             </div>
             <div class="form-group col-lg-12">
                 <label class="col-lg-3 control-label">Miejsce wystawienia</label>
-                <div class="col-lg-9"><input type="text" class="form-control" name="place"></div>
+                <div class="col-lg-9">
+                    {{ form_widget(form.place, {'attr': {'class' : 'form-control'}}) }}
+                </div>
             </div>
         </div>
     </div>
@@ -35,47 +43,67 @@ Nowa faktura
             <h3>Sprzedawca:</h3>
             <div class="form-group col-lg-12">
                 <label class="col-lg-3 control-label">Nazwa</label>
-                <div class="col-lg-9"><input class="form-control" type="text" name="seller_name" id="seller_name"></div>
+                <div class="col-lg-9">
+                    {{ form_widget(form.seller.name, {'attr': {'class' : 'form-control'}}) }}
+                </div>
             </div>
             <div class="form-group col-lg-12">
                 <label class="col-lg-3 control-label">Adres</label>
-                <div class="col-lg-9"><input class="form-control" type="text" name="seller_address"></div>
+                <div class="col-lg-9">
+                    {{ form_widget(form.seller.address, {'attr': {'class' : 'form-control'}}) }}
+                </div>
             </div>
             <div class="form-group col-lg-12">
                 <label class="col-lg-3 control-label">Miejscowość</label>
-                <div class="col-lg-9"><input class="form-control" type="text" name="seller_city"></div>
+                <div class="col-lg-9">
+                    {{ form_widget(form.seller.city, {'attr': {'class' : 'form-control'}}) }}
+                </div>
             </div>
             <div class="form-group col-lg-12">
                 <label class="col-lg-3 control-label">Kod pocztowy</label>
-                <div class="col-lg-9"><input class="form-control" type="text" name="seller_postal"></div>
+                <div class="col-lg-9">
+                    {{ form_widget(form.seller.zipCode, {'attr': {'class' : 'form-control'}}) }}
+                </div>
             </div>
             <div class="form-group col-lg-12">
                 <label class="col-lg-3 control-label">NIP</label>
-                <div class="col-lg-9"><input class="form-control" type="text" name="seller_NIP"></div>
+                <div class="col-lg-9">
+                    {{ form_widget(form.seller.nip, {'attr': {'class' : 'form-control'}}) }}
+                </div>
             </div>
         </div>
 
-        <div class="col-lg-6" id="seller">
+        <div class="col-lg-6" id="client">
             <h3>Nabywca:</h3>
             <div class="form-group col-lg-12">
                 <label class="col-lg-3 control-label">Nazwa</label>
-                <div class="col-lg-9"><input class="form-control" type="text" name="client_name" id="client_name"></div>
+                <div class="col-lg-9">
+                    {{ form_widget(form.client.name, {'attr': {'class' : 'form-control'}}) }}
+                </div>
             </div>
             <div class="form-group col-lg-12">
                 <label class="col-lg-3 control-label">Adres</label>
-                <div class="col-lg-9"><input class="form-control" type="text" name="client_address"></div>
+                <div class="col-lg-9">
+                    {{ form_widget(form.client.address, {'attr': {'class' : 'form-control'}}) }}
+                </div>
             </div>
             <div class="form-group col-lg-12">
                 <label class="col-lg-3 control-label">Miejscowość</label>
-                <div class="col-lg-9"><input class="form-control" type="text" name="client_city"></div>
+                <div class="col-lg-9">
+                    {{ form_widget(form.client.city, {'attr': {'class' : 'form-control'}}) }}
+                </div>
             </div>
             <div class="form-group col-lg-12">
                 <label class="col-lg-3 control-label">Kod pocztowy</label>
-                <div class="col-lg-9"><input class="form-control" type="text" name="client_postal"></div>
+                <div class="col-lg-9">
+                    {{ form_widget(form.client.zipCode, {'attr': {'class' : 'form-control'}}) }}
+                </div>
             </div>
             <div class="form-group col-lg-12">
                 <label class="col-lg-3 control-label">NIP</label>
-                <div class="col-lg-9"><input class="form-control" type="text" name="client_NIP"></div>
+                <div class="col-lg-9">
+                    {{ form_widget(form.client.nip, {'attr': {'class' : 'form-control'}}) }}
+                </div>
             </div>
         </div>
     </div>
@@ -98,25 +126,25 @@ Nowa faktura
                 <tr class="product_row">
                     <td>1</td>
                     <td class="product_name">
-                        <input type="text" class="form-control" name="product[0][product_name]">
+                        {{ form_widget(form.products[0].name, {'attr': {'class' : 'form-control'}}) }}
                     </td>
                     <td class="product_quantity">
-                        <input type="number" class="form-control" name="product[0][product_quantity]">
+                        {{ form_widget(form.products[0].quantity, {'attr': {'class' : 'form-control'}, 'type' : 'number'}) }}
                     </td>
                     <td class="netto_price">
-                        <input type="number" class="form-control" name="product[0][netto_price]">
+                        {{ form_widget(form.products[0].nettoPrice, {'attr': {'class' : 'form-control'}, 'type' : 'number'}) }}
                         </td>
                     <td class="netto_value">
-                        <input type="number" class="form-control" readonly="readonly" name="product[0][netto_value]">
+                        {{ form_widget(form.products[0].nettoValue, {'attr': {'class' : 'form-control', 'readonly' : 'readonly'}, 'type' : 'number'}) }}
                     </td>
                     <td class="vat">
-                        <input type="number" class="form-control" value="23" readonly="readonly" name="product[0][vat]">
+                        {{ form_widget(form.products[0].vat, {'attr': {'class' : 'form-control', 'readonly' : 'readonly', 'value' : '23'}, 'type' : 'number'}) }}
                     </td>
                     <td class="vat_value">
-                        <input type="number" class="form-control" readonly="readonly" name="product[0][vat_value]">
+                        {{ form_widget(form.products[0].vatValue, {'attr': {'class' : 'form-control', 'readonly' : 'readonly'}, 'type' : 'number'}) }}
                     </td>
                     <td class="brutto_value">
-                        <input type="number" class="form-control" readonly="readonly" name="product[0][brutto_value]">
+                        {{ form_widget(form.products[0].bruttoValue, {'attr': {'class' : 'form-control', 'readonly' : 'readonly'}, 'type' : 'number'}) }}
                     </td>
                 </tr>
             </tbody>
@@ -148,6 +176,7 @@ Nowa faktura
     <div class="col-lg-12"><hr></div>
     <div class="col-lg-12">
         <label for="comment" class="control-label">Uwagi</label>
+        {{ form_widget(form.comment, {'attr': {'class': 'form-control'}}) }}
         <textarea class="form-control col-lg-12" name="comment" placeholder="Np. informacja o zwolnieniu z VAT"></textarea>
     </div>
     <div class="col-lg-12">

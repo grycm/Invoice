@@ -62,13 +62,13 @@ class Invoice
     private $products;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Subject", inversedBy="issuedInvoices")
+     * @ORM\ManyToOne(targetEntity="Subject", inversedBy="issuedInvoices", cascade={"persist"})
      * @ORM\JoinColumn(name="seller_id", referencedColumnName="id")
      */
     private $seller;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Subject", inversedBy="receivedInvoices")
+     * @ORM\ManyToOne(targetEntity="Subject", inversedBy="receivedInvoices", cascade={"persist"})
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
      */
     private $client;
@@ -214,6 +214,7 @@ class Invoice
     public function addProduct(\InvoiceBundle\Entity\Product $products)
     {
         $this->products[] = $products;
+        $products->setInvoice($this);
 
         return $this;
     }

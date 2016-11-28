@@ -24,16 +24,16 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="product_name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $productName;
+    private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="product_quantity", type="string", length=255)
+     * @ORM\Column(name="quantity", type="string", length=255)
      */
-    private $productQuantity;
+    private $quantity;
 
     /**
      * @var string
@@ -71,7 +71,7 @@ class Product
     private $bruttoValue;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Invoice", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="Invoice", inversedBy="products", cascade={"persist"})
      * @ORM\JoinColumn(name="invoice_id", referencedColumnName="id")
      */
     private $invoice;
@@ -88,49 +88,49 @@ class Product
     }
 
     /**
-     * Set productName
+     * Set name
      *
-     * @param string $productName
+     * @param string $name
      * @return Product
      */
-    public function setProductName($productName)
+    public function setName($name)
     {
-        $this->productName = $productName;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get productName
+     * Get name
      *
      * @return string 
      */
-    public function getProductName()
+    public function getName()
     {
-        return $this->productName;
+        return $this->name;
     }
 
     /**
-     * Set productQuantity
+     * Set quantity
      *
-     * @param string $productQuantity
+     * @param string $quantity
      * @return Product
      */
-    public function setProductQuantity($productQuantity)
+    public function setQuantity($quantity)
     {
-        $this->productQuantity = $productQuantity;
+        $this->quantity = $quantity;
 
         return $this;
     }
 
     /**
-     * Get productQuantity
+     * Get quantity
      *
      * @return string 
      */
-    public function getProductQuantity()
+    public function getQuantity()
     {
-        return $this->productQuantity;
+        return $this->quantity;
     }
 
     /**

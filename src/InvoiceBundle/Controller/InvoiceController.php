@@ -12,6 +12,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use InvoiceBundle\Form\InvoiceType;
+
 
 class InvoiceController extends Controller
 {
@@ -23,7 +25,13 @@ class InvoiceController extends Controller
      */
     public function newAction()
     {
-
+        $invoice = new Invoice;
+        $invoice->setSeller(new Subject());
+        $invoice->setClient(new Subject);
+        $invoice->addProduct(new Product());
+        $form = $this->createForm(InvoiceType::class, $invoice);
+        
+        return ['form' => $form->createView()];
     }
 
     /**
@@ -34,35 +42,44 @@ class InvoiceController extends Controller
     public function generateAction(Request $request)
     {
 
+        $invoice = new Invoice;
+        $invoice->setSeller(new Subject());
+        $invoice->setClient(new Subject);
+        $invoice->addProduct(new Product());
+        $form = $this->createForm(InvoiceType::class, $invoice);
+        
+        $form->handleRequest($request);
+        $pInvoice = $form->getData();
+        
         //dump($request->request);
         $em = $this->getDoctrine()->getManager();
 
-        //get Invoice data from form
-        $invoice = $this->getInvoiceData($request);
-
-        //get Seller Data from form
-        $seller = $this->getSubjectData($request, 'seller');
-        $em->persist($seller);
-        
-        //get Clinet Data from form
-        $client = $this->getSubjectData($request, 'client');
-        $em->persist($client);
-        
-        //add Seller and Clinet to Invoice
-        $invoice->setClient($client);
-        $invoice->setSeller($seller);
-
-        foreach ($request->request->get('product') as $product) {
-            $pProduct = $this->getProductData($product);
-
-            //add Product to Invoice
-            $em->persist($pProduct);
-            $pProduct->setInvoice($invoice);
-        }
+//        //get Invoice data from form
+//        $invoice = $this->getInvoiceData($request);
+//
+//        //get Seller Data from form
+//        $seller = $this->getSubjectData($request, 'seller');
+//        $em->persist($seller);
+//        
+//        //get Clinet Data from form
+//        $client = $this->getSubjectData($request, 'client');
+//        $em->persist($client);
+//        
+//        //add Seller and Clinet to Invoice
+//        $invoice->setClient($client);
+//        $invoice->setSeller($seller);
+//
+//        foreach ($request->request->get('product') as $product) {
+//            $pProduct = $this->getProductData($product);
+//
+//            //add Product to Invoice
+//            $em->persist($pProduct);
+//            $pProduct->setInvoice($invoice);
+//        }
 
 
         //flush everything
-        $em->persist($invoice);
+        $em->persist($pInvoice);
         $em->flush();
 
         return $this->redirectToRoute('showInvoice', ['id' => $invoice->getId()]);
@@ -123,8 +140,8 @@ class InvoiceController extends Controller
         $pBruttoValue = $pNettoValue + $pVatValue;
 
         $pProduct = new Product();
-        $pProduct->setProductName($pName);
-        $pProduct->setProductQuantity($pQuantity);
+        $pProduct->setName($pName);
+        $pProduct->setQuantity($pQuantity);
         $pProduct->setNettoPrice($pNettoPrice);
         $pProduct->setNettoValue($pNettoValue);
         $pProduct->setVat($pVat);
